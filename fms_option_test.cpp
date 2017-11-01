@@ -1,4 +1,5 @@
 // fms_option_test.cpp - test option valuation
+#include "../fmsdual/dual.h"
 #include "daly.h"
 #include "brownian.h"
 #include "option.h"
@@ -30,6 +31,9 @@ void fms_option_test_(void)
 
 	v2 = option::call(f, s, k, t/2, brownian<I>());
 	ensure (v2 < v1);
+
+	dual::number<T,2> F(f,1), V;
+	V = option::call(F, s, k, t, brownian<I,dual::number<T,2>>());
 }
 
 void fms_option_test(void)

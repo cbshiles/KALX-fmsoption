@@ -5,7 +5,7 @@
 
 namespace fms {
 
-	// normal::I::cdf is any standard normal distribution
+	// normal<I>::cdf is any standard normal distribution
 	template<class I, class Z = double, class S = double, class T = double>
 	struct brownian {
 		static auto kappa(S s, T t) -> decltype(s*t) 

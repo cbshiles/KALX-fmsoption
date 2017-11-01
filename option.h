@@ -14,6 +14,8 @@ namespace option {
 	template<class F, class S, class K, class T, class X>
 	inline auto put(F f, S s, K k, T t, X x) -> decltype(f+s+k+t)
 	{
+		typedef decltype(f+s+k+t) Z;
+
 		ensure (f >= 0);
 		ensure (s >= 0);
 		ensure (k >= 0);
@@ -23,11 +25,11 @@ namespace option {
 		if (1 + f == f)
 			return k;
 		if (1 + s == s || 1 + t == t)
-			return std::max(k - f, 0.);
+			return std::max<F>(k - f, 0.);
 		if (1 + k == k)
-			return 0;
+			return Z(0.);
 
-		auto z = (x.kappa(s,t) + log(k/f))/s;
+		Z z = (x.kappa(s,t) + log(k/f))/s;
 
 		return k*x.cdf(z,t) - f*x.cdf_(z,t,s);
 	}
