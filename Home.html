@@ -1,0 +1,52 @@
+<html>
+<body>
+</body></html><h2>Option pricing for arbitrary distributions</h2>
+<p>This project makes it simple to price European puts, calls, and binary options. In addition, numerically stable calculations of 
+greeks of all orders can be computed
+using the <a href="http://fmsdual.codeplex.com">fmsdual</a> project.
+</p>
+<p>
+If X is a random variable then the <em>cumulant</em> of X is &kappa;(s) = log E[exp(s X)]. 
+If (X<sub>t</sub>)<sub>t&ge;0</sub> is a stochastic process the cumulant of X<sub>t</sub>
+is &kappa;(t, s) = log E[exp(s X<sub>t</sub>)]. If (X<sub>t</sub>) is a L&eacute;vy process
+then &kappa;(t, s) = t &kappa;(s), but that is not used here.
+</p>
+<p>Define the <em>cumulant distribution function</em>
+by &kappa;(t, s, z) = log E[exp(s X<sub>t</sub>) 1(X<sub>t</sub> &le; z)].
+</p>
+<p>The Fischer Black model gives the foward price of a put option as E[max{k - F, 0}], where k is the strike and F is
+the risk-neutral value of the underlying at expiration. If F = f exp(-&kappa;(t, s) + s X<sub>t</sub>), then E[F] = f.
+The put price is 
+</p>
+<blockquote>
+<table bgcolor="#bbbbbb" frame="void" rules="none">
+<tr>
+<td>E[max{k - F, 0}]</td>
+<td>=</td> 
+<td>k E(1(F &le; k)] - E[F 1(F &le; k)]</td>
+</tr>
+<tr>
+<td>&nbsp;</td> 
+<td>=</td>
+<td>k P(F &le; k) - f exp(-&kappa;(t, s)) E[exp(s X<sub>t</sub>) 1(F &le; k)]</td> 
+</tr>
+<tr>
+<td>&nbsp;</td>
+<td>=</td>
+<td>k P(X<sub>t</sub> &le; z) - f exp(-&kappa;(t, s) + &kappa;(t, s, z)),</td> 
+</tr>
+</table>
+</blockquote>
+<p>
+where z = (log k/f + &kappa;(t, s))/s.
+</p> 
+<p>
+If X<sub>t</sub> is standard Brownian motion, then &kappa;(t, s) = s<sup>2</sup>t/2 and &kappa;(t, s, z) = &kappa;(t, s) - log N((z - st)/&radic;t),
+where N is the standard normal cummulative distribution. The above reduces to
+<blockquote>
+k N(-d<sub>2</sub>) - f N(-d<sub>1</sub>),
+</blockquote>
+for the standard values of d<sub>1</sub> and d<sub>2</sub>.
+</p>
+</body>
+</html>
